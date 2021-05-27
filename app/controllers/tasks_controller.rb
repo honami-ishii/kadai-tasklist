@@ -7,8 +7,9 @@ class TasksController < ApplicationController
       @tasks = current_user.tasks.order(id: :desc)
       end
   end
-
+  
   def show
+      @user = User.find(params[:id])
   end
 
   def new
@@ -16,7 +17,6 @@ class TasksController < ApplicationController
   end
 
   def create
-      @task = Task.new(task_params)
       @task = current_user.tasks.build(task_params)
 
     if @task.save
@@ -27,9 +27,6 @@ class TasksController < ApplicationController
       flash.now[:danger] = 'Task が投稿されませんでした'
       render :new
     end
-  end
-  
-  def edit
   end
 
   def update
