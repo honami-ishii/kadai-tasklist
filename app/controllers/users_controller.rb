@@ -5,9 +5,6 @@ class UsersController < ApplicationController
     @users = User.order(id: :desc)
   end
 
-  def show
-  end
-
   def new
     @user = User.new
   end
