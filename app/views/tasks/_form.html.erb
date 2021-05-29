@@ -2,9 +2,7 @@
   <% if message.errors.any? %>
     <div id="error_explanation">
       <ul>
-        <% message.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+       <%= render 'layouts/error_messages' %>
       </ul>
     </div>
   <% end %>
