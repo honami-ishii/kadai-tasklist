@@ -1,13 +1,13 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:destroy,:show,:edit,:update]
+  before_action :set_message, only: [:show, :edit]
   
   def index
       @tasks = current_user.tasks.order(id: :desc)
   end
   
   def show
-      @task = Task.find(params[:id])
   end
 
   def new
@@ -22,14 +22,13 @@ class TasksController < ApplicationController
       flash[:success] = 'Task が正常に投稿されました'
       redirect_to root_url
     else
-      @tasks = current_user.tasks.order(id: :desc).page(params[:page])
+      @tasks = current_user.tasks.order(id: :desc)
       flash.now[:danger] = 'Task が投稿されませんでした'
       render :new
     end
   end
   
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
@@ -57,6 +56,10 @@ class TasksController < ApplicationController
     unless @task
       redirect_to root_url
     end
+  end
+  
+  def set_message
+    @task = Task.find(params[:id])
   end
     
   # Strong Parameter
