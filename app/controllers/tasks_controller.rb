@@ -55,10 +55,6 @@ class TasksController < ApplicationController
       redirect_to root_url
     end
   end
-  
-  def set_message
-    @task = Task.find(params[:id])
-  end
     
   # Strong Parameter
   def task_params
